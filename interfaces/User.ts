@@ -1,3 +1,4 @@
 // export const User{
-//     user
+//     username:string,
+// password:string
 // }
