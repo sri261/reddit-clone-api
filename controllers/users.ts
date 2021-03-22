@@ -19,6 +19,7 @@ module.exports.signup = async (request: any, response: any) => {
 };
 
 module.exports.login = async (request: any, response: any) => {
+  console.log(request.body, "request for login");
   try {
     const user = await User.query().findOne({
       username: request.body.username,
