@@ -14,7 +14,9 @@ module.exports.signup = async (request: Request, response: Response) => {
       password: hash,
       token: token,
     });
-    response.status(200).json({ username: user.username, token: user.token });
+    response
+      .status(200)
+      .json({ id: user.id, username: user.username, token: user.token });
   } catch (error) {
     response.send(error);
   }

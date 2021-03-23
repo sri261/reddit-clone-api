@@ -18,15 +18,6 @@ module.exports.addSubredditSub = async (
   }
 };
 
-module.exports.test = async (request: Request, response: Response) => {
-  try {
-    const test = await SubredditSubs.query();
-    response.send(test);
-  } catch (error) {
-    response.send(error);
-  }
-};
-
 //gets all the subscribed subreddits for a user
 module.exports.getSubsSubreddits = async (
   request: Request,
