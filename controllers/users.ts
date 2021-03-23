@@ -19,13 +19,12 @@ module.exports.signup = async (request: any, response: any) => {
 };
 
 module.exports.login = async (request: any, response: any) => {
-  console.log(request.body, "request for login");
   try {
     const user = await User.query().findOne({
       username: request.body.username,
     });
     if (!user) {
-      response.send("username does not exist");
+      response.status(404).send("username does not exist");
     } else {
       const passwordCheck = await bcrypt.compare(
         request.body.password,
@@ -37,7 +36,7 @@ module.exports.login = async (request: any, response: any) => {
             username: user.username,
             token: user.token,
           })
-        : response.send("enter correct password");
+        : response.status(401).send("enter correct password");
     }
   } catch (error) {
     response.send(error);

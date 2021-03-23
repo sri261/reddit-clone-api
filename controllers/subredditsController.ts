@@ -11,6 +11,11 @@ module.exports.getSubreddits = async (request: any, response: any) => {
   }
 };
 
+// module.exports.getSubredditsForUser = async (request: any, response: any) => {
+//   try {
+//   } catch (error) {}
+// };
+
 module.exports.addSubreddit = async (request: any, response: any) => {
   try {
     const subRed = await Subreddit.query().insert({
