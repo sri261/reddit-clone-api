@@ -1,6 +1,16 @@
 import { ModuleKind } from "typescript";
 import { Subreddit } from "../models/subreddits";
 
+module.exports.getSubreddits = async (request: any, response: any) => {
+  try {
+    const subreddits = await Subreddit.query();
+    response.send(subreddits);
+  } catch (error) {
+    console.log(error);
+    response.send(error);
+  }
+};
+
 module.exports.addSubreddit = async (request: any, response: any) => {
   try {
     const subRed = await Subreddit.query().insert({
