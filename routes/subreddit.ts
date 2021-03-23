@@ -1,5 +1,5 @@
 const express = require("express");
-const subRedditsController = require("../controllers/subreddits");
+const subRedditsController = require("../controllers/subredditsController");
 
 const router = express.Router();
 
