@@ -1,7 +1,8 @@
 import { ModuleKind } from "typescript";
 import { Subreddit } from "../models/subreddits";
+import { Request, Response } from "express";
 
-module.exports.getSubreddits = async (request: any, response: any) => {
+module.exports.getSubreddits = async (request: Request, response: Response) => {
   try {
     const subreddits = await Subreddit.query();
     response.send(subreddits);
@@ -11,7 +12,7 @@ module.exports.getSubreddits = async (request: any, response: any) => {
   }
 };
 
-module.exports.addSubreddit = async (request: any, response: any) => {
+module.exports.addSubreddit = async (request: Request, response: Response) => {
   try {
     const subRed = await Subreddit.query().insert({
       subreddit: request.body.subreddit,
@@ -24,7 +25,10 @@ module.exports.addSubreddit = async (request: any, response: any) => {
   }
 };
 
-module.exports.updateSubreddit = async (request: any, response: any) => {
+module.exports.updateSubreddit = async (
+  request: Request,
+  response: Response
+) => {
   try {
     const subRed = await Subreddit.query()
       .findById(request.body.id)
@@ -36,7 +40,10 @@ module.exports.updateSubreddit = async (request: any, response: any) => {
   }
 };
 
-module.exports.deleteSubreddit = async (request: any, response: any) => {
+module.exports.deleteSubreddit = async (
+  request: Request,
+  response: Response
+) => {
   try {
     const subRed = await Subreddit.query().deleteById(request.body.id);
     response.json({ subRed: subRed });

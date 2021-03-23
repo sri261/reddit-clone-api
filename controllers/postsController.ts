@@ -1,6 +1,7 @@
 import { Post } from "../models/postsModel";
+import { Request, Response } from "express";
 
-module.exports.getPosts = async (request: any, response: any) => {
+module.exports.getPosts = async (request: Request, response: Response) => {
   try {
     const posts = await Post.query();
     response.send(posts);
@@ -10,7 +11,7 @@ module.exports.getPosts = async (request: any, response: any) => {
   }
 };
 
-module.exports.createPost = async (request: any, response: any) => {
+module.exports.createPost = async (request: Request, response: Response) => {
   try {
     const post = await Post.query().insert({
       post: request.body.post,
