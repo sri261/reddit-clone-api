@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { Subreddit } from "../models/subreddits";
 
 import { SubredditSubs } from "../models/SubredditSubsModel";
 
@@ -16,6 +17,16 @@ module.exports.addSubredditSub = async (
     response.send(error);
   }
 };
+
+module.exports.test = async (request: Request, response: Response) => {
+  try {
+    const test = await SubredditSubs.query();
+    response.send(test);
+  } catch (error) {
+    response.send(error);
+  }
+};
+
 //gets all the subscribed subreddits for a user
 module.exports.getSubsSubreddits = async (
   request: Request,
@@ -24,7 +35,8 @@ module.exports.getSubsSubreddits = async (
   try {
     const subs = await SubredditSubs.query()
       .select("*")
-      .where("userId", "=", request.body.userId);
+      .where("userId", "=", request.body.userId)
+      .withGraphFetched("subreddits");
     response.send(subs);
   } catch (error) {
     response.send(error);

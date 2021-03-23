@@ -12,13 +12,17 @@ module.exports.getSubreddits = async (request: Request, response: Response) => {
   }
 };
 
-// module.exports.getSubredditsForUser = async (
-//   request: Request,
-//   response: Response
-// ) => {
-//   try {
-//   } catch (error) {}
-// };
+module.exports.getSubredditsForUser = async (
+  request: Request,
+  response: Response
+) => {
+  try {
+    const sub = await Subreddit.query().findById(request.body.id);
+    response.send(sub);
+  } catch (error) {
+    response.send(error);
+  }
+};
 
 module.exports.addSubreddit = async (request: Request, response: Response) => {
   try {
