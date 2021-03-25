@@ -1,8 +1,12 @@
 exports.up = async function (knex) {
   await knex.schema.createTable("subredditSubs", (table) => {
     table.increments("id").primary();
-    table.integer("userId").references("id").inTable("users");
-    table.integer("subredditId").references("id").inTable("subreddits");
+    table.integer("user_id").references("id").inTable("users").index();
+    table
+      .integer("subreddit_id")
+      .references("id")
+      .inTable("subreddits")
+      .index();
   });
 };
 

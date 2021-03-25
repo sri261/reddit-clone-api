@@ -29,7 +29,7 @@ module.exports.addSubreddit = async (request: Request, response: Response) => {
     const subRed = await Subreddit.query().insert({
       title: request.body.title,
       description: request.body.description,
-      creatorId: request.body.creatorId,
+      user_id: request.body.user_id,
     });
     response.send(subRed);
   } catch (error) {

@@ -3,7 +3,7 @@ exports.up = async function (knex) {
     table.increments("id").primary();
     table.string("title").notNullable();
     table.string("description").notNullable();
-    table.integer("creatorId").references("id").inTable("users");
+    table.integer("user_id").references("id").inTable("users").index();
   });
 };
 
