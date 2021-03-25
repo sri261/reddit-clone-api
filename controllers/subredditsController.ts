@@ -27,7 +27,8 @@ module.exports.getSubreddits = async (request: Request, response: Response) => {
 module.exports.addSubreddit = async (request: Request, response: Response) => {
   try {
     const subRed = await Subreddit.query().insert({
-      subreddit: request.body.subreddit,
+      title: request.body.title,
+      description: request.body.description,
       creatorId: request.body.creatorId,
     });
     response.send(subRed);

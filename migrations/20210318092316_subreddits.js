@@ -1,7 +1,8 @@
 exports.up = async function (knex) {
   await knex.schema.createTable("subreddits", (table) => {
     table.increments("id").primary();
-    table.string("subreddit").notNullable();
+    table.string("title").notNullable();
+    table.string("description").notNullable();
     table.integer("creatorId").references("id").inTable("users");
   });
 };

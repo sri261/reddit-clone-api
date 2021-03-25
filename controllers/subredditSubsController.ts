@@ -28,7 +28,7 @@ module.exports.getSubsSubreddits = async (
       .select("*")
       .where("userId", "=", request.body.userId)
       .withGraphFetched("subreddits");
-    response.send(subs);
+    response.send(subs.subreddits);
   } catch (error) {
     response.send(error);
   }
