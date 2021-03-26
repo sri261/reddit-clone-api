@@ -1,10 +1,14 @@
 import express from "express";
+import {
+  createPost,
+  updatePost,
+  deletePost,
+} from "../controllers/postsController";
 const postsController = require("../controllers/postsController");
 const router = express.Router();
 
-router.post("/create", postsController.createPost);
-router.get("/get", postsController.getPosts);
-
-// router.post("/update", subRedditsController.updateSubreddit);
+router.post("/", createPost);
+router.patch("/:user_id/:post_id", updatePost);
+router.delete("/:user_id/:post_id", deletePost);
 
 module.exports = router;

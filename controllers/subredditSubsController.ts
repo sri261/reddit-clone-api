@@ -9,8 +9,8 @@ module.exports.addSubredditSub = async (
 ) => {
   try {
     const sub = await SubredditSubs.query().insert({
-      userId: request.body.userId,
-      subredditId: request.body.subredditId,
+      user_id: request.body.user_id,
+      subreddit_id: request.body.subreddit_id,
     });
     response.status(200).send(sub);
   } catch (error) {
@@ -18,7 +18,6 @@ module.exports.addSubredditSub = async (
   }
 };
 
-//gets all the subscribed subreddits for a user
 module.exports.getSubsSubreddits = async (
   request: Request,
   response: Response
@@ -26,9 +25,9 @@ module.exports.getSubsSubreddits = async (
   try {
     const subs = await SubredditSubs.query()
       .select("*")
-      .where("userId", "=", request.body.userId)
+      .where("user_id", "=", request.body.user_id)
       .withGraphFetched("subreddits");
-    response.send(subs.subreddits);
+    response.send(subs);
   } catch (error) {
     response.send(error);
   }

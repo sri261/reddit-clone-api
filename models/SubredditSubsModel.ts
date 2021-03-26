@@ -18,7 +18,7 @@ export class SubredditSubs extends Model {
         relation: Model.BelongsToOneRelation,
         modelClass: Subreddit,
         join: {
-          from: "subredditSubs.subredditId",
+          from: "subredditSubs.subreddit_id",
           to: "subreddits.id",
         },
       },

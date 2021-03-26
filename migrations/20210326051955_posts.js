@@ -1,13 +1,15 @@
 exports.up = async function (knex) {
-  await knex.schema.createTable("subreddit_votes", (table) => {
+  await knex.schema.createTable("posts", (table) => {
     table.increments("id").primary();
     table.integer("user_id").references("id").inTable("users");
     table.integer("subreddit_id").references("id").inTable("subreddits");
-    table.string("vote").notNullable();
-    table.unique("user_id", "subreddit_id");
+    table.string("post_title").notNullable();
+    table.string("post_description");
+    table.string("timestamp").notNullable();
+    table.string("update_timestamp");
   });
 };
 
 exports.down = async function (knex) {
-  await knex.schema.dropTable("subreddit_votes");
+  await knex.schema.dropTable("posts");
 };

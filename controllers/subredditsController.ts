@@ -1,4 +1,3 @@
-import { ModuleKind } from "typescript";
 import { Subreddit } from "../models/subreddits";
 import { Request, Response } from "express";
 
@@ -12,28 +11,14 @@ module.exports.getSubreddits = async (request: Request, response: Response) => {
   }
 };
 
-// module.exports.getSubredditsForUser = async (
-//   request: Request,
-//   response: Response
-// ) => {
-//   try {
-//     const sub = await Subreddit.query().findById(request.body.id);
-//     response.send(sub);
-//   } catch (error) {
-//     response.send(error);
-//   }
-// };
-
 module.exports.addSubreddit = async (request: Request, response: Response) => {
   try {
     const subRed = await Subreddit.query().insert({
-      title: request.body.title,
-      description: request.body.description,
-      user_id: request.body.user_id,
+      ...request.body,
+      timestamp: new Date(),
     });
     response.send(subRed);
   } catch (error) {
-    console.log(error);
     response.send(error);
   }
 };
@@ -44,12 +29,15 @@ module.exports.updateSubreddit = async (
 ) => {
   try {
     const subRed = await Subreddit.query()
-      .findById(request.body.id)
-      .patch({ subreddit: request.body.subreddit });
-    response.json({ subred: subRed });
+      .findById(request.params.subreddit_id)
+      .select("*")
+      .where("user_id", "=", request.params.user_id)
+      .patch({ ...request.body, updated_timestamp: new Date() });
+    subRed === 1
+      ? response.status(200).json({ status: "success" })
+      : response.status(403).json({ status: "update failed" });
   } catch (error) {
     response.json({ error: error });
-    console.log(error);
   }
 };
 
@@ -58,8 +46,12 @@ module.exports.deleteSubreddit = async (
   response: Response
 ) => {
   try {
-    const subRed = await Subreddit.query().deleteById(request.body.id);
-    response.json({ subRed: subRed });
+    const subRed = await Subreddit.query()
+      .where("user_id", "=", request.params.user_id)
+      .deleteById(request.params.subreddit_id);
+    subRed === 1
+      ? response.status(200).json({ status: "success" })
+      : response.status(403).json({ status: "failed" });
   } catch (error) {
     response.json({ error: error });
   }
