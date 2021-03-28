@@ -1,9 +1,12 @@
 import express from "express";
 const router = express.Router();
-import { addVote } from "../controllers/postVoteController";
+import {
+  addVote,
+  getTotalVoteForPost,
+} from "../controllers/postVoteController";
 
 router.post("/vote", addVote);
-// router.patch("/:user_id/:post_id", updatePost);
+router.get("/vote/:post_id", getTotalVoteForPost);
 // router.delete("/:user_id/:post_id", deletePost);
 
 module.exports = router;

@@ -5,9 +5,10 @@ exports.seed = function (knex) {
     .then(function () {
       // Inserts seed entries
       return knex("posts_vote").insert([
-        { user_id: 1, post_id: 21, vote: "up" },
-        { user_id: 2, post_id: 22, vote: "down" },
-        { user_id: 3, post_id: 23, vote: "up" },
+        { user_id: 1, post_id: 1, vote: "up" },
+        { user_id: 2, post_id: 2, vote: "down" },
+        { user_id: 3, post_id: 3, vote: "up" },
+        { user_id: 4, post_id: 4, vote: "down" },
       ]);
     });
 };

@@ -23,3 +23,11 @@ export const addVote = async (request: Request, response: Response) => {
     response.send(error);
   }
 };
+
+export const getTotalVoteForPost = async (
+  request: Request,
+  response: Response
+) => {
+
+  response.send('working')
+};
