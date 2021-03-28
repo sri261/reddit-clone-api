@@ -4,7 +4,6 @@ import {
   updatePost,
   deletePost,
 } from "../controllers/postsController";
-const postsController = require("../controllers/postsController");
 const router = express.Router();
 
 router.post("/", createPost);

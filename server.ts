@@ -12,6 +12,8 @@ const port = process.env.PORT || 4000;
 app.use("/", require("./routes/users"));
 app.use("/subreddit", require("./routes/subreddit"));
 app.use("/posts", require("./routes/postsRoute"));
+app.use("/posts", require("./routes/postVotesRoute"));
+
 app.use("/subredditSubs", require("./routes/subredditSubRoute"));
 app.use("/subreddit", require("./routes/subredditVotesRoute"));
 

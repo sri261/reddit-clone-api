@@ -5,10 +5,26 @@ exports.seed = function (knex) {
     .then(function () {
       // Inserts seed entries
       return knex("users").insert([
-        { username: "user 1", password: "password" },
-        { username: "user 2", password: "password" },
-        { username: "user 3", password: "password" },
-        { username: "user 4", password: "password" },
+        {
+          username: "user1",
+          password: "password",
+          token: "$2b$10$v2DJbD9eF3o5nywKftx8jOLMSCXYezzouI9kxJ.vi1uNuMRJ3Gkdm",
+        },
+        {
+          username: "user2",
+          password: "password",
+          token: "$2b$10$v2DJbD9eF3o5nywKftx8jOLMSCXYezzouI9kxJ.vi1uNuMRJ3Gkdm",
+        },
+        {
+          username: "user3",
+          password: "password",
+          token: "$2b$10$v2DJbD9eF3o5nywKftx8jOLMSCXYezzouI9kxJ.vi1uNuMRJ3Gkdm",
+        },
+        {
+          username: "user4",
+          password: "password",
+          token: "$2b$10$v2DJbD9eF3o5nywKftx8jOLMSCXYezzouI9kxJ.vi1uNuMRJ3Gkdm",
+        },
       ]);
     });
 };
