@@ -9,6 +9,7 @@ exports.up = async function (knex) {
     table.string("update_timestamp");
     table.integer("upvotes");
     table.integer("downvotes");
+    table.integer("comments_count");
   });
 };
 

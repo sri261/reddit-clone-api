@@ -5,8 +5,6 @@ exports.up = async function (knex) {
     table.integer("user_id").references("id").inTable("users");
     table.integer("comment_id").references("id").inTable("comments");
     table.string("vote").notNullable();
-    table.integer("upvotes");
-    table.integer("downvotes");
     table.unique("user_id", "comment_id");
   });
 };

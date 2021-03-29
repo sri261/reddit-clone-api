@@ -9,6 +9,9 @@ exports.seed = function (knex) {
           post_title: "post one",
           post_description: "post number one",
           timestamp: new Date(),
+          upvotes: 2,
+          downvotes: 2,
+          comments_count: 0,
         },
         {
           user_id: 2,
@@ -16,6 +19,9 @@ exports.seed = function (knex) {
           post_title: "post two",
           post_description: "post number two",
           timestamp: new Date(),
+          upvotes: 2,
+          downvotes: 2,
+          comments_count: 0,
         },
         {
           user_id: 3,
@@ -23,6 +29,9 @@ exports.seed = function (knex) {
           post_title: "post three",
           post_description: "post number three",
           timestamp: new Date(),
+          upvotes: 2,
+          downvotes: 2,
+          comments_count: 0,
         },
         {
           user_id: 4,
@@ -30,6 +39,9 @@ exports.seed = function (knex) {
           post_title: "post four",
           post_description: "post number four",
           timestamp: new Date(),
+          upvotes: 2,
+          downvotes: 2,
+          comments_count: 0,
         },
         {
           user_id: 3,
@@ -37,6 +49,9 @@ exports.seed = function (knex) {
           post_title: "post five",
           post_description: "post number five",
           timestamp: new Date(),
+          upvotes: 2,
+          downvotes: 2,
+          comments_count: 0,
         },
       ]);
     });

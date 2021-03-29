@@ -8,6 +8,8 @@ exports.up = async function (knex) {
     table.string("comment").notNullable();
     table.string("timestamp").notNullable();
     table.string("update_timestamp");
+    table.integer("upvotes");
+    table.integer("downvotes");
   });
 };
 
