@@ -1,5 +1,4 @@
-import express, { request } from "express";
-import { router } from "./routes/subredditVotesRoute";
+import express from "express";
 var bodyParser = require("body-parser");
 
 const app = express();
@@ -14,6 +13,7 @@ app.use("/subreddit", require("./routes/subreddit"));
 app.use("/posts", require("./routes/postsRoute"));
 app.use("/posts", require("./routes/postVotesRoute"));
 app.use("/posts", require("./routes/commentsRoute"));
+app.use("/comments", require("./routes/commentsVoteRoute"));
 
 app.use("/subredditSubs", require("./routes/subredditSubRoute"));
 app.use("/subreddit", require("./routes/subredditVotesRoute"));

@@ -17,7 +17,6 @@ export const addNewComment = async (request: Request, response: Response) => {
   }
 };
 
-//given post_id
 export const getCommentsForPost = async (
   request: Request,
   response: Response
@@ -25,10 +24,7 @@ export const getCommentsForPost = async (
   try {
     const comment = await Comment.query()
       .select("*")
-      .where("post_id", "=", request.params.post_id)
-      .then(() => {});
-    //   .withGraphFetched("comments");
-    //   const test =await Comment.query()
+      .where("post_id", "=", request.params.post_id);
     response.send(comment);
   } catch (error) {
     response.send(error);
