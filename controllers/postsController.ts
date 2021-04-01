@@ -1,5 +1,49 @@
 import { Post } from "../models/postsModel";
 import { Request, Response } from "express";
+const { raw } = require("objection");
+const { knex } = require("knex");
+
+export const getNewPosts = async (request: Request, response: Response) => {
+  try {
+    const posts = await Post.query()
+      .orderBy("timestamp", "desc")
+      .withGraphFetched("subreddit")
+      .withGraphFetched("user");
+
+    response.status(200).send(posts);
+  } catch (error) {
+    response.status(400).send(error);
+  }
+};
+
+export const getPostsHot = async (request: Request, response: Response) => {
+  try {
+    const posts = await Post.query()
+      .select(raw(" * ,(upvotes+downvotes+comments_count)").as("hot"))
+      .orderBy("hot", "desc")
+      .withGraphFetched("subreddit")
+      .withGraphFetched("user");
+    response.send(posts);
+  } catch (error) {
+    response.send(error);
+  }
+};
+
+export const getAllFollowedPosts = async (
+  request: Request,
+  response: Response
+) => {
+  try {
+    const posts = await Post.query().where(
+      "user_id",
+      "=",
+      request.params.user_id
+    );
+    response.status(200).send(posts);
+  } catch (error) {
+    response.status(400).send(error);
+  }
+};
 
 export const createPost = async (request: Request, response: Response) => {
   try {
@@ -12,6 +56,21 @@ export const createPost = async (request: Request, response: Response) => {
     response.send(post);
   } catch (error) {
     console.log(error);
+    response.send(error);
+  }
+};
+
+export const getPostForSubreddit = async (
+  request: Request,
+  response: Response
+) => {
+  try {
+    const posts = await Post.query()
+      .where("subreddit_id", "=", request.params.subreddit_id)
+      .withGraphFetched("subreddit")
+      .withGraphFetched("user");
+    response.send(posts);
+  } catch (error) {
     response.send(error);
   }
 };

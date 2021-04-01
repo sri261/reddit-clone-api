@@ -5,11 +5,12 @@ exports.up = async function (knex) {
     table.integer("subreddit_id").references("id").inTable("subreddits");
     table.string("post_title").notNullable();
     table.string("post_description");
-    table.string("timestamp").notNullable();
-    table.string("update_timestamp");
+    table.timestamp("timestamp").notNullable();
+    table.timestamp("update_timestamp");
     table.integer("upvotes");
     table.integer("downvotes");
     table.integer("comments_count");
+    table.string("image_location");
   });
 };
 

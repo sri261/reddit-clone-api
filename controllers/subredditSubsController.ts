@@ -1,32 +1,47 @@
 import { Request, Response } from "express";
 import { Subreddit } from "../models/subreddits";
 
-import { SubredditSubs } from "../models/SubredditSubsModel";
+import { SubredditFollower } from "../models/SubredditSubsModel";
 
 module.exports.addSubredditSub = async (
   request: Request,
   response: Response
 ) => {
   try {
-    const sub = await SubredditSubs.query().insert({
+    const checkSub = await SubredditFollower.query().findOne({
       user_id: request.body.user_id,
       subreddit_id: request.body.subreddit_id,
     });
-    response.status(200).send(sub);
+
+    if (!checkSub) {
+      const sub = await SubredditFollower.query().insert({
+        user_id: request.body.user_id,
+        subreddit_id: request.body.subreddit_id,
+      });
+      response.status(200).send(sub);
+    } else {
+      const deleteSub = await SubredditFollower.query().deleteById(checkSub.id);
+      response.status(200).json({
+        status: deleteSub,
+        message: `user ${checkSub.user_id} unfollowed subreddit id ${checkSub.subreddit_id}`,
+      });
+    }
   } catch (error) {
     response.send(error);
   }
 };
 
-module.exports.getSubsSubreddits = async (
+module.exports.getFollowedSubredditsForUser = async (
   request: Request,
   response: Response
 ) => {
   try {
-    const subs = await SubredditSubs.query()
+    const subs = await SubredditFollower.query()
       .select("*")
-      .where("user_id", "=", request.body.user_id)
-      .withGraphFetched("subreddits");
+      .where("user_id", "=", request.params.user_id)
+      // .orderBy("timestamp", "desc")
+      .withGraphFetched("posts");
+
     response.send(subs);
   } catch (error) {
     response.send(error);

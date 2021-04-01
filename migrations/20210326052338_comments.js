@@ -6,8 +6,8 @@ exports.up = async function (knex) {
     table.integer("post_id").references("id").inTable("posts");
     table.integer("comment_id").references("id").inTable("comments");
     table.string("comment").notNullable();
-    table.string("timestamp").notNullable();
-    table.string("update_timestamp");
+    table.timestamp("timestamp").notNullable();
+    table.timestamp("update_timestamp");
     table.integer("upvotes");
     table.integer("downvotes");
   });

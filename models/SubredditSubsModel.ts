@@ -1,4 +1,5 @@
 import { Subreddit } from "../models/subreddits";
+import { Post } from "../models/postsModel";
 const knex = require("knex");
 const connection = require("../knexfile");
 const { Model } = require("objection");
@@ -7,19 +8,19 @@ const knexConnection = knex(connection);
 
 Model.knex(knexConnection);
 
-export class SubredditSubs extends Model {
+export class SubredditFollower extends Model {
   static get tableName() {
-    return "subredditSubs";
+    return "subreddit_followers";
   }
 
   static get relationMappings() {
     return {
-      subreddits: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: Subreddit,
+      posts: {
+        relation: Model.HasManyRelation,
+        modelClass: Post,
         join: {
-          from: "subredditSubs.subreddit_id",
-          to: "subreddits.id",
+          from: "subreddit_followers.subreddit_id",
+          to: "posts.subreddit_id",
         },
       },
     };

@@ -3,9 +3,10 @@ exports.up = async function (knex) {
     table.increments("id").primary();
     table.string("subreddit_name").notNullable().unique();
     table.string("description").notNullable();
-    table.string("timestamp").notNullable();
-    table.string("updated_timestamp");
+    table.timestamp("timestamp").notNullable();
+    table.timestamp("updated_timestamp");
     table.integer("user_id").references("id").inTable("users").index();
+    table.string("image_location");
   });
 };
 

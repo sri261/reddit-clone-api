@@ -1,3 +1,4 @@
+import { User } from "../models/users";
 const knex = require("knex");
 const connection = require("../knexfile");
 const { Model } = require("objection");
@@ -11,16 +12,16 @@ export class Comment extends Model {
     return "comments";
   }
 
-  // static get relationMappings() {
-  //   return {
-  //     comment: {
-  //       relation: Model.BelongsToOneRelation,
-  //       modelClass: Comment,
-  //       join: {
-  //         from: "comments.comment_id",
-  //         to: "comments.id",
-  //       },
-  //     },
-  //   };
-  // }
+  static get relationMappings() {
+    return {
+      user: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: User,
+        join: {
+          from: "comments.user_id",
+          to: "users.id",
+        },
+      },
+    };
+  }
 }

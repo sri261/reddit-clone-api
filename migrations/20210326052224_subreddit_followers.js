@@ -7,7 +7,7 @@ exports.up = async function (knex) {
       .references("id")
       .inTable("subreddits")
       .index();
-    table.unique("subreddit_id", "user_id");
+    table.unique(["subreddit_id", "user_id"]);
   });
 };
 

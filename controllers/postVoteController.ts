@@ -3,6 +3,7 @@ import { Post } from "../models/postsModel";
 import { Request, Response } from "express";
 
 export const addVote = async (request: Request, response: Response) => {
+  console.log(request.body);
   try {
     const vote = await PostVote.query().findOne({
       user_id: request.body.user_id,
