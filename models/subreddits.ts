@@ -23,6 +23,15 @@ export class Subreddit extends Model {
           to: "subreddit_followers.subreddit_id",
         },
       },
+
+      // followed_subreddits: {
+      //   relation: Model.HasManyRelation,
+      //   modelClass: SubredditFollower,
+      //   join: {
+      //     from: "subreddits.id",
+      //     to: "subreddit_followers.subreddit_id",
+      //   },
+      // }
     };
   }
 }

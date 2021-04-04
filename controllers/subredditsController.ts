@@ -4,9 +4,11 @@ import { Request, Response } from "express";
 //get subreddit by given subreddit_id
 module.exports.getSubreddits = async (request: Request, response: Response) => {
   try {
-    const subreddits = await Subreddit.query()
-      .where("id", "=", request.params.subreddit_id)
-      .withGraphFetched("subreddit_followers");
+    const subreddits = await Subreddit.query().where(
+      "id",
+      "=",
+      request.params.subreddit_id
+    );
     response.send(subreddits);
   } catch (error) {
     response.send(error);
@@ -14,7 +16,6 @@ module.exports.getSubreddits = async (request: Request, response: Response) => {
 };
 
 module.exports.addSubreddit = async (request: Request, response: Response) => {
-  // response.send("test");
   try {
     const subRed = await Subreddit.query().insert({
       ...request.body,
@@ -50,8 +51,13 @@ module.exports.updateSubreddit = async (
       .select("*")
       .where("user_id", "=", request.params.user_id)
       .patch({ ...request.body, updated_timestamp: new Date() });
+
+    const subRedUpdate = await Subreddit.query()
+      .findById(request.params.subreddit_id)
+      .select("*")
+      .where("user_id", "=", request.params.user_id);
     subRed === 1
-      ? response.status(200).json({ status: "success" })
+      ? response.status(200).send(subRedUpdate)
       : response.status(403).json({ status: "update failed" });
   } catch (error) {
     response.json({ error: error });

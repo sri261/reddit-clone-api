@@ -1,3 +1,4 @@
+import { SubredditFollower } from "../models/SubredditSubsModel";
 const knex = require("knex");
 const connection = require("../knexfile");
 const { Model } = require("objection");
@@ -11,16 +12,16 @@ export class User extends Model {
     return "users";
   }
 
-  // static get relationMappings() {
-  //   return {
-  //     idea: {
-  //       relation: Model.BelongsToOneRelation,
-  //       modelClass: Idea,
-  //       join: {
-  //         from: "comments.ideas_id",
-  //         to: "ideas.id",
-  //       },
-  //     },
-  //   };
-  // }
+  static get relationMappings() {
+    return {
+      followed_subreddits: {
+        relation: Model.HasManyRelation,
+        modelClass: SubredditFollower,
+        join: {
+          from: "users.id",
+          to: "subreddit_followers.user_id",
+        },
+      },
+    };
+  }
 }

@@ -5,8 +5,8 @@ const router = express.Router();
 
 router.post("/follow", subRedditSubsController.addSubredditSub);
 
-router.post(
-  "/follow/:user_id",
+router.get(
+  "/followed/:user_id",
   subRedditSubsController.getFollowedSubredditsForUser
 );
 

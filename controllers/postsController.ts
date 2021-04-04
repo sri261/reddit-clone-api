@@ -67,6 +67,7 @@ export const getPostForSubreddit = async (
   try {
     const posts = await Post.query()
       .where("subreddit_id", "=", request.params.subreddit_id)
+
       .withGraphFetched("subreddit")
       .withGraphFetched("user");
     response.send(posts);
