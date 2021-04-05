@@ -19,6 +19,6 @@ router.get("/:subreddit_id", getPostForSubreddit);
 
 // router.get("/:user_id", getLatestPostsForUser);
 
-router.get("/general-posts/:user_id", getAllFollowedPosts);
+router.get("/best/:user_id", getAllFollowedPosts);
 
 module.exports = router;
